@@ -4,7 +4,7 @@ namespace mood_Analyser
 {
     public class MoodAnalyser
     {
-        private string message;
+        string message;
 
         /// <summary>
         /// default constructor
@@ -27,14 +27,21 @@ namespace mood_Analyser
         {
             try
             {
+                //If message length is empty
+                if (message.Length == 0)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.EMPTY, "Please Enter proper mood.");
+                }
                 if (message.Contains("sad", StringComparison.OrdinalIgnoreCase))
                     return "sad";
                 else
                     return "happy";
             }
-            catch
+            catch (NullReferenceException exception)
             {
-                return "happy";
+                
+                Console.WriteLine(exception.Message);
+                throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NULL, "Please enter proper mood");
             }
         }
         /// <summary>
