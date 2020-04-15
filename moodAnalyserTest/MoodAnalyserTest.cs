@@ -9,7 +9,7 @@ namespace moodAnalyserTest
         {
         }
         /// <summary>
-        /// Analyse sad mood method test
+        /// Analyse mood method unit  - return sad mood
         /// </summary>
         [Test]
         public void GivenSadMood_WhenProper_ShouldReturnSad()
@@ -21,7 +21,7 @@ namespace moodAnalyserTest
             Assert.AreEqual(expected, mood);
         }
         /// <summary>
-        /// Analyse Happy method test
+        /// Analyse mood method unit  - return sad mood
         /// </summary>
         [Test]
         public void GivenHappyMood_WhenProper_ShouldReturnHappy()
