@@ -25,10 +25,17 @@ namespace mood_Analyser
         /// <returns> happy or sad depending upon message </returns>
         public string AnalyseMood()
         {
-            if (message.Contains("sad"))
-                return "sad";
-            else
+            try
+            {
+                if (message.Contains("sad", StringComparison.OrdinalIgnoreCase))
+                    return "sad";
+                else
+                    return "happy";
+            }
+            catch
+            {
                 return "happy";
+            }
         }
         /// <summary>
         /// main method

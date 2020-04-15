@@ -32,5 +32,18 @@ namespace moodAnalyserTest
             string mood = object_Mood.AnalyseMood();
             Assert.AreEqual(expected, mood);
         }
+
+        /// <summary>
+        /// Analyse mood method unit test - return null
+        /// </summary>
+        [Test]
+        public void GivenNull_ShouldReturnNull()
+        {
+            string expected = "happy";
+            string message = null;
+            MoodAnalyser obj_mood = new MoodAnalyser(message);
+            string mood = obj_mood.AnalyseMood();
+            Assert.AreEqual(expected, mood);
+        }
     }
 }
