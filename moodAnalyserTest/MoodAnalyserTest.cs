@@ -34,16 +34,43 @@ namespace moodAnalyserTest
         }
 
         /// <summary>
-        /// Analyse mood method unit test - return null
+        /// Analyse mood method unit - throw null exception
         /// </summary>
         [Test]
-        public void GivenNull_ShouldReturnNull()
+        public void GivenNullMood_ShouldthrowException()
         {
-            string expected = "happy";
+            string expected = "Please enter proper mood.";
             string message = null;
-            MoodAnalyser obj_mood = new MoodAnalyser(message);
-            string mood = obj_mood.AnalyseMood();
-            Assert.AreEqual(expected, mood);
+            MoodAnalyser object_Mood = new MoodAnalyser(message);
+            try
+            {
+                string mood = object_Mood.AnalyseMood();
+                Assert.AreEqual(expected, mood);
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
+
+        /// <summary>
+        /// Analyse mood method unit - throw empty exception
+        /// </summary>
+        [Test]
+        public void GivenEmptyMood_ShouldThrowException()
+        {
+            string expected = "Please Enter proper mood.";
+            string message = "";
+            MoodAnalyser object_Mood = new MoodAnalyser(message);
+            try
+            {
+                string mood = object_Mood.AnalyseMood();
+                Assert.AreEqual(expected, mood);
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
         }
     }
 }

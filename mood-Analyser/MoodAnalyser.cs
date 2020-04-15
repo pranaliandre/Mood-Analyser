@@ -27,9 +27,16 @@ namespace mood_Analyser
         {
             try
             {
-                //If message length is empty
+                //exception handled if user inputs null
+                if (message == null)
+                {
+                    //Calling MoodAnalyserException(Exception type->enum, message)
+                    throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NULL, "Please enter proper mood.");
+                }
+                //exception handled if user inputs nothing
                 if (message.Length == 0)
                 {
+                    //Calling MoodAnalyserException(Exception type->enum, message)
                     throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.EMPTY, "Please Enter proper mood.");
                 }
                 if (message.Contains("sad", StringComparison.OrdinalIgnoreCase))
@@ -39,9 +46,7 @@ namespace mood_Analyser
             }
             catch (NullReferenceException exception)
             {
-                
-                Console.WriteLine(exception.Message);
-                throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NULL, "Please enter proper mood");
+                return exception.Message;
             }
         }
         /// <summary>
