@@ -6,17 +6,21 @@ namespace mood_Analyser
 {
     public class MoodAnalyserException : Exception
     {
+        //enumeration of custom exception
         public enum MoodExceptionType
         {
+            NULL,
             EMPTY,
-            NULL
+            ERROR_IN_OBJECT_CREATION,
+            NO_SUCH_CLASS,
+            NO_SUCH_METHOD
         }
 
-        readonly MoodExceptionType ExceptionType;
+        private MoodExceptionType exceptionType;
 
-        public MoodAnalyserException(MoodExceptionType ExceptionType, string exceptionMessage) : base(exceptionMessage)
+        public MoodAnalyserException(MoodExceptionType exceptionType, string exceptionMessage) : base(exceptionMessage)
         {
-            this.ExceptionType = ExceptionType;
+            this.exceptionType = exceptionType;
         }
     }
 }
