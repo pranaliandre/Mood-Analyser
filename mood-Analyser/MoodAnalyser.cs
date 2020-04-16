@@ -48,8 +48,7 @@ namespace mood_Analyser
             {
                 return exception.Message;
             }
-        }
-       
+        } 
         /// <summary>
         /// main method
         /// </summary>
@@ -57,6 +56,9 @@ namespace mood_Analyser
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Mood Analyser");
+            MoodAnalyserFactory<MoodAnalyser> object_mood = new MoodAnalyserFactory<MoodAnalyser>();
+            var constructorInfo = object_mood.GetConstructor(1);
+            var obj_instance = object_mood.GetParameterizedInsatance("MoodAnalyser", constructorInfo, "I am in SAD Mood");
         }
 
     }

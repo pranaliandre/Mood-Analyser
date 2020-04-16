@@ -17,7 +17,6 @@ namespace mood_Analyser
         }
 
         private MoodExceptionType exceptionType;
-
         public MoodAnalyserException(MoodExceptionType exceptionType, string exceptionMessage) : base(exceptionMessage)
         {
             this.exceptionType = exceptionType;

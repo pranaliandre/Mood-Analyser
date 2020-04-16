@@ -40,7 +40,8 @@ namespace mood_Analyser
             public object GetInstance(string class_name, ConstructorInfo constructor)
             {
                 try
-                {   // create type using given type
+                {   
+                // create type using given type
                     Type type = typeof(Gtype);
                     // given class not equals to type name throw exception
                     if (class_name == "MoodAnalysis")
@@ -58,5 +59,30 @@ namespace mood_Analyser
                     throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.ERROR_IN_OBJECT_CREATION, "Error occured in Object creation");
                 }
             }
+        ///<summery>
+        ///method to 
+        /// </summery>
+        public object GetParameterizedInsatance(string class_name, ConstructorInfo constructor, string parameterMessage)
+        {
+            try
+            {
+                // create type using given type
+                Type type = typeof(Gtype);
+                // given class not equals to type name throw exception
+                if (class_name == "MoodAnalysis")
+                    throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NO_SUCH_CLASS, "Please enter valid Class");
+                // given constructor name is not equals to constructor of type throw exception
+                if (constructor != type.GetConstructors()[1])
+                    throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NO_SUCH_METHOD, "No such Method Found");
+                //creating instance using parametersised constructor
+                Object Object_return = Activator.CreateInstance(type, parameterMessage);
+                return Object_return;
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.Message);
+                throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.ERROR_IN_OBJECT_CREATION, "Error occured in Object creation");
+            }
+        }
     }
 }

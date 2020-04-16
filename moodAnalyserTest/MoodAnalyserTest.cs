@@ -138,6 +138,71 @@ namespace moodAnalyserTest
                 Assert.AreEqual(expected, exception.Message);
             }
         }
-
+        /// <summary>
+        /// Test to given Moodanalyser when proper return mood analyser object with parameterized constructor.
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyser_ShouldReturnMoodAnalyser_WithParameterizedConstructor()
+        {
+            object expected = new MoodAnalyser();
+            // create object for moodfactory and get default constructor of class MoodAnalyser
+            MoodAnalyserFactory<MoodAnalyser> object_mood = new MoodAnalyserFactory<MoodAnalyser>();
+            ConstructorInfo constructorInfo = object_mood.GetConstructor(1);
+            string message = "I am in Sad Mood";
+            try
+            {
+                // create instace for MoodAnalyser by calling GetInstance Method
+                object object_compare = object_mood.GetParameterizedInsatance("MoodAnalyser", constructorInfo, message);
+                expected.Equals(object_compare);
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
+        /// <summary>
+        /// Test to given mood analyser class inmproper should return throw exception
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserClassImproper_ShouldReturnThrowException_WithParameterizedConstructor()
+        {
+            object expected ="Please enter valid Class";
+            // create object for moodfactory and get default constructor of class MoodAnalyser
+            MoodAnalyserFactory<MoodAnalyser> object_mood = new MoodAnalyserFactory<MoodAnalyser>();
+            ConstructorInfo constructorInfo = object_mood.GetConstructor(1);
+            string message = "I am in Sad Mood";
+            try
+            {
+                // create instace for MoodAnalyser by calling GetInstance Method
+                object object_compare = object_mood.GetParameterizedInsatance("Democlass", constructorInfo, message);
+                expected.Equals(object_compare);
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
+        /// <summary>
+        /// Test to given mood analyser class and constructor improper sholud throw exception 
+        /// </summary>
+        [Test]
+        public void GivenMoodAnalyserClassAndConstructorImproper_ReturnThrowException_WithParameterizedConstructor()
+        {
+            object expected = "No such Method Found";
+            // create object for moodfactory and get default constructor of class MoodAnalyser
+            MoodAnalyserFactory<MoodAnalyser> object_mood = new MoodAnalyserFactory<MoodAnalyser>();
+            ConstructorInfo constructorInfo = object_mood.GetConstructor(1);
+            string message = "I am in Sad Mood";
+            try
+            {
+                // create instace for MoodAnalyser by calling GetInstance Method
+                object object_compare = object_mood.GetParameterizedInsatance("DemoMethod", constructorInfo, message);
+                expected.Equals(object_compare);
+            }
+            catch (MoodAnalyserException exception)
+            {
+                Assert.AreEqual(expected, exception.Message);
+            }
+        }
     }
 }
