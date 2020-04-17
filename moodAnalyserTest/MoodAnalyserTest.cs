@@ -223,5 +223,38 @@ namespace moodAnalyserTest
             string Expected = "No such Method Found";
             Assert.AreEqual(Expected, actual);
         }
+
+        /// <summary>
+        /// Test for invoke the method using reflection given happy message return happy message dynamically
+        /// </summary>
+        [Test]
+        public void MethodInvoke_UsingReflection_shouldReturnHappyDynamically()
+        {
+            string actual = MoodAnalyserFactory<MoodAnalyser>.InvokeMethodUsingReflection("AnalyseMood", "HAPPY");
+            string Expected = "HAPPY";
+            Expected.Equals(actual);
+        }
+        /// <summary>
+        /// Test for given field improper throw exception
+        /// </summary>
+        [Test]
+        public void GivenImproperField_throwException()
+        {
+            string actual = MoodAnalyserFactory<MoodAnalyser>.InvokeMethodUsingReflection("Improper_Method", "Field_Name");
+            string Expected = "No Such Field Found";
+            Assert.AreEqual(Expected, actual);
+        }
+        /// <summary>
+        /// Test for setting null message throw exception
+        /// </summary>
+        [Test]
+        public void GivenNullField_throwException()
+        {
+            string actual = MoodAnalyserFactory<MoodAnalyser>.InvokeMethodUsingReflection("AnalyseMood", null);
+            string Expected = "Can Not Set Null To Field";
+            //Assert.Equals(Expected, actual);
+            Expected.Equals(actual);
+        }
+
     }
 }

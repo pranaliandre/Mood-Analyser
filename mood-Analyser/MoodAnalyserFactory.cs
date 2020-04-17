@@ -85,9 +85,8 @@ namespace mood_Analyser
             }
         }
 
-
         /// <summary>
-        /// Method for InvokeMethodUsingReflection
+        /// Method for InvokeMethodUsingReflection change dynamically mood
         /// </summary>
         public static string InvokeMethodUsingReflection(string methodName, string fieldName)
         {
