@@ -166,7 +166,7 @@ namespace moodAnalyserTest
         [Test]
         public void GivenMoodAnalyserClassImproper_ShouldReturnThrowException_WithParameterizedConstructor()
         {
-            object expected ="Please enter valid Class";
+            object expected = "Please enter valid Class";
             // create object for moodfactory and get default constructor of class MoodAnalyser
             MoodAnalyserFactory<MoodAnalyser> object_mood = new MoodAnalyserFactory<MoodAnalyser>();
             ConstructorInfo constructorInfo = object_mood.GetConstructor(1);
@@ -203,6 +203,25 @@ namespace moodAnalyserTest
             {
                 Assert.AreEqual(expected, exception.Message);
             }
+        }
+        /// <summary>
+        /// Test for invoke the method using reflection given happy message return happy message
+        /// </summary>
+        [Test]
+        public void MethodInvoke_UsingReflection_shouldReturnHappy()
+        {
+            string actual = MoodAnalyserFactory<MoodAnalyser>.InvokeMethodUsingReflection("AnalyseMood", "HAPPY");
+            string Expected = "HAPPY";
+            Expected.Equals(actual);
+        }
+        /// <summary>
+        /// Test for given Happy message improper method throw exception
+        /// </summary>
+        public void GivenImproperMethod_throwException()
+        {
+            string actual = MoodAnalyserFactory<MoodAnalyser>.InvokeMethodUsingReflection("AnalyseMood", "Improper_Method_Name");
+            string Expected = "No such Method Found";
+            Assert.AreEqual(Expected, actual);
         }
     }
 }

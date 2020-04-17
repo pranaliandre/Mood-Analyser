@@ -13,7 +13,9 @@ namespace mood_Analyser
             EMPTY,
             ERROR_IN_OBJECT_CREATION,
             NO_SUCH_CLASS,
-            NO_SUCH_METHOD
+            NO_SUCH_METHOD,
+            NO_SUCH_FIELD,
+            ENTERED_NULL
         }
 
         private MoodExceptionType exceptionType;

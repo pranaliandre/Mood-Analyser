@@ -6,7 +6,7 @@ using System.Reflection;
 using mood_Analyser;
 namespace mood_Analyser
 {
-    public class MoodAnalyserFactory<Gtype>
+    public class MoodAnalyserFactory<MoodAnalyser>
     {
             ///<summary>
             ///Method to get the class constructors
@@ -15,7 +15,7 @@ namespace mood_Analyser
             {
                 try
                 {
-                    Type type = typeof(Gtype);
+                    Type type = typeof(MoodAnalyser);
                     ConstructorInfo[] constructor = type.GetConstructors();
                     // sending defalut constructor => parameters are 0
                     foreach (var info in constructor)
@@ -42,7 +42,7 @@ namespace mood_Analyser
                 try
                 {   
                 // create type using given type
-                    Type type = typeof(Gtype);
+                    Type type = typeof(MoodAnalyser);
                     // given class not equals to type name throw exception
                     if (class_name == "MoodAnalysis")
                         throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NO_SUCH_CLASS, "Please enter valid Class");
@@ -60,14 +60,14 @@ namespace mood_Analyser
                 }
             }
         ///<summery>
-        ///method to 
+        ///method to get instance using reflection with parameter
         /// </summery>
         public object GetParameterizedInsatance(string class_name, ConstructorInfo constructor, string parameterMessage)
         {
             try
             {
                 // create type using given type
-                Type type = typeof(Gtype);
+                Type type = typeof(MoodAnalyser);
                 // given class not equals to type name throw exception
                 if (class_name == "MoodAnalysis")
                     throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NO_SUCH_CLASS, "Please enter valid Class");
@@ -84,5 +84,61 @@ namespace mood_Analyser
                 throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.ERROR_IN_OBJECT_CREATION, "Error occured in Object creation");
             }
         }
+
+
+        /// <summary>
+        /// Method for InvokeMethodUsingReflection
+        /// </summary>
+        public static string InvokeMethodUsingReflection(string methodName, string fieldName)
+        {
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Type typeMoodAnalyser = Type.GetType("mood_Analyser.MoodAnalyser");
+            MethodInfo methodInfo = typeMoodAnalyser.GetMethod(methodName);
+
+            string[] stringArray = { "I am in Happy mood" };
+            object objectInstance = Activator.CreateInstance(typeMoodAnalyser, stringArray);
+            try
+            {
+                if (fieldName != null)
+                {
+                    FieldInfo fieldInfo = typeMoodAnalyser.GetField(fieldName);
+                    if (fieldInfo == null)
+                        throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NO_SUCH_FIELD, "No Such Field Found");
+                    fieldInfo.SetValue(objectInstance, fieldName);
+                }
+            }
+            catch (MoodAnalyserException exception)
+            {
+                return exception.Message;
+            }
+            try
+            {
+                if (fieldName == null)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.ENTERED_NULL, "Can Not Set Null To Field");
+                }
+            }
+            catch (MoodAnalyserException exception)
+            {
+                return exception.Message;
+            }
+            try
+            {
+                if (methodInfo == null)
+                {
+                    throw new MoodAnalyserException(MoodAnalyserException.MoodExceptionType.NO_SUCH_METHOD, "No such Method Found");
+                }
+
+                string method = (string)methodInfo.Invoke(objectInstance, null);
+                return method;
+            }
+            catch (MoodAnalyserException)
+            {
+                return "HAPPY";
+               
+            }
+        }
     }
 }
+
